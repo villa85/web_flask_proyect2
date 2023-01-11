@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Listado de Autores</title>
+    </head>
+    <body>
+    <div>
+        <h2>{{titulo}}</h2>
+        <ol>
+            {% for autor in lista_autores %}
+            <li>
+                {{ autor[1] }}
+                <a href="{{ url_for('editarautor', id=autor[0]) }}">Editar</a>
+                <a href="{{ url_for('borrarautor', id=autor[0]) }}">Borrar</a>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+    </body>
+</html>
