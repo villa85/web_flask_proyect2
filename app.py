@@ -29,8 +29,15 @@ def nuevoautor():
 
 @app.route("/autores/editar/<int:id>", methods=('GET',  'POST'))
 def editarautor(id):
-    pass
+    if request.method == 'GET':
+        autor=repo.findtAutor(id)
+        return render_template('updateautor.html',autor=autor)
+    else: # significa que es post
+        nombre = request.form['nombre']
+        repo.updateAutor(id,nombre)
+        return redirect('/autores/listado')
 
 @app.route("/autores/borrar/<int:id>", methods=('GET',  'POST'))
 def borrarautor(id):
-    pass
+    repo.deleteAutor(id)
+    return redirect('/autores/listado')

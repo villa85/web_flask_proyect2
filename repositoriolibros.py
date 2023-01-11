@@ -70,3 +70,33 @@ def selectFirstAutor():
     cursor.close()
     conexion.close()
     return autores
+
+def deleteAutor(id):
+
+    conexion = s3.connect("libros.db")
+    cursor = conexion.cursor()
+    cursor.execute('delete from autores where id = ?',(id,))
+    conexion.commit()
+    cursor.close()
+    conexion.close()
+    return cursor.rowcount == 1
+
+def updateAutor(id,nombre):
+
+    conexion = s3.connect("libros.db")
+    cursor = conexion.cursor()
+    cursor.execute('update autores set nombre = ? where id = ?',(nombre,id))
+    conexion.commit()
+    cursor.close()
+    conexion.close()
+    return cursor.rowcount == 1
+
+def findtAutor(id):
+
+    conexion = s3.connect("libros.db")
+    cursor = conexion.cursor()
+    cursor.execute('select id, nombre from autores where id = ?',(id,))
+    autores = cursor.fetchone()
+    cursor.close()
+    conexion.close()
+    return autores
